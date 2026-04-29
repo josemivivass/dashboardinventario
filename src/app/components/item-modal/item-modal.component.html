@@ -1,0 +1,47 @@
+<div class="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>{{ item ? 'EDITAR ACTIVO' : 'NUEVO ACTIVO' }}</h2>
+      <button class="close-btn" (click)="close.emit()">CERRAR</button>
+    </div>
+    
+    <form (ngSubmit)="guardar()">
+      <div class="form-group">
+        <label>Material</label>
+        <input type="text" [(ngModel)]="formData.nombre" name="nombre" required>
+      </div>
+
+      <div class="form-group">
+        <label>Categoría</label>
+        <select [(ngModel)]="formData.categoria" name="categoria">
+          <option value="Armamento">Armamento</option>
+          <option value="Médico">Médico</option>
+          <option value="Sigilo">Sigilo</option>
+          <option value="Herramientas">Herramientas</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Stock Disponible</label>
+        <input type="number" [(ngModel)]="formData.stock" name="stock" required>
+      </div>
+
+      <div class="form-group">
+        <label>Precio Unitario (¥)</label>
+        <input type="number" [(ngModel)]="formData.precioUnitario" name="precio" required>
+      </div>
+
+      <div class="form-group">
+        <label>Rango Requerido</label>
+        <select [(ngModel)]="formData.rangoRequerido" name="rango">
+          <option value="Genin">Genin</option>
+          <option value="Chunin">Chunin</option>
+          <option value="Jonin">Jonin</option>
+          <option value="Anbu">Anbu</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn-submit">{{ item ? 'REGISTRAR CAMBIOS' : 'AÑADIR AL ARSENAL' }}</button>
+    </form>
+  </div>
+</div>

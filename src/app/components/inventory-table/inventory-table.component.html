@@ -1,0 +1,48 @@
+<div class="table-container">
+  <div class="toolbar">
+    <input type="text" placeholder="Buscar suministros o categorías..." [ngModel]="searchTerm()" (ngModelChange)="searchTerm.set($event)" class="search-input">
+    
+    <div class="range-filter">
+      <label>STOCK MÍNIMO: {{ minStock() }}</label>
+      <input type="range" min="0" max="200" [ngModel]="minStock()" (ngModelChange)="minStock.set($event)">
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-primary" (click)="abrirModalNuevo()">NUEVO ACTIVO</button>
+      <button class="btn btn-excel" (click)="exportarInventario('excel')">EXCEL</button>
+      <button class="btn btn-pdf" (click)="exportarInventario('pdf')">PDF</button>
+    </div>
+  </div>
+
+  <table class="anbu-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>MATERIAL</th>
+        <th>CATEGORÍA</th>
+        <th>STOCK</th>
+        <th>RANGO</th>
+        <th>ACCIONES</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let s of suministrosFiltrados()" [class.stock-critico]="s.stock < 10">
+        <td>{{ s.id }}</td>
+        <td>{{ s.nombre }}</td>
+        <td>{{ s.categoria }}</td>
+        <td>{{ s.stock }}</td>
+        <td>
+          <span class="badge" [ngClass]="'badge-' + s.rangoRequerido.toLowerCase()">
+            {{ s.rangoRequerido | uppercase }}
+          </span>
+        </td>
+        <td class="action-cells">
+          <button class="icon-btn edit" (click)="abrirModalEditar(s)">✎</button>
+          <button class="icon-btn delete" (click)="eliminarItem(s.id)">🗑</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-item-modal *ngIf="isModalOpen" [item]="itemToEdit" (close)="cerrarModal()"></app-item-modal>

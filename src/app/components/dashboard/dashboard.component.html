@@ -1,0 +1,31 @@
+<div class="anbu-dashboard">
+  <div class="kpi-card">
+    <div class="kpi-title">STOCK TOTAL</div>
+    <div class="kpi-value">{{ stats.totalStock }}</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-title">VALORACIÓN TOTAL</div>
+    <div class="kpi-value">{{ stats.totalValor }} ¥</div>
+  </div>
+  <div class="kpi-card alert">
+    <div class="kpi-title">ALERTAS CRÍTICAS</div>
+    <div class="kpi-value">{{ stats.bajoStock }}</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-title">CATEGORÍA LÍDER</div>
+    <div class="kpi-value">{{ stats.categoriaPrincipal }}</div>
+  </div>
+
+  <div class="chart-card radar-area">
+    <h3>BALANCE DE OPERACIONES</h3>
+    <canvas baseChart [data]="radarChartData" [options]="radarChartOptions" type="radar"></canvas>
+  </div>
+  <div class="chart-card pie-area">
+    <h3>DISTRIBUCIÓN DE RECURSOS</h3>
+    <canvas baseChart [data]="pieChartData" [options]="pieChartOptions" type="pie"></canvas>
+  </div>
+  <div class="chart-card bar-area">
+    <h3>STOCK POR CATEGORÍA</h3>
+    <canvas baseChart [data]="barChartData" [options]="barChartOptions" type="bar"></canvas>
+  </div>
+</div>
